@@ -16,8 +16,7 @@ app.use(express.static(path.join(__dirname, '/../client')))
 //     res.sendFile('.index.html');
 // })
 
-console.log(process.env)
-let port = process.env.port || 3000;
+let port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log('listening on ' + port);
