@@ -1,5 +1,7 @@
 <div>
     loaded app
+    <input ng-change="$ctrl.addPlayer()" ng-model="$ctrl.searchQuery" class="form-control" type="text" />
+    <button ng-click="$ctrl.search()" class="btn"></button>
     <div>
         <select-person></select-person>
     </div>

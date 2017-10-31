@@ -1,3 +1,7 @@
 .titleBar {
     background-color: rgb(172, 128, 33)
 }
+
+.form-control {
+    width: 50%;
+}

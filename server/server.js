@@ -24,7 +24,7 @@ app.post('/lookup', (req, res) => {
 
     let name = req.body
 
-    request.get(`http://census.daybreakgames.com/get/ps2:v2/character/?name.first_lower=litebrite`, () => {
+    request.get(`http://census.daybreakgames.com/get/ps2:v2/character/?name.first_lower=${name}`, () => {
 
     })
 })

@@ -15,6 +15,7 @@
     "bootstrap": "^3.3.7",
     "express": "^4.16.2",
     "mongodb": "^2.2.33",
+    "mongoose": "^4.12.5",
     "nodemon": "^1.12.1",
     "request": "^2.83.0",
     "ws": "^3.2.0"
