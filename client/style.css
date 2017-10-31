@@ -1,7 +1,21 @@
+.backborder {
+    background-color: rgb(149, 197, 183)
+}
+
 .titleBar {
     background-color: rgb(172, 128, 33)
 }
 
-.form-control {
+/* .form-control {
     width: 50%;
+} */
+
+.textbar {
+    width: 50%
+}
+
+.centerbody {
+    background-color: rgb(159, 159, 184);
+    width: 90%;
+    height: 100%
 }

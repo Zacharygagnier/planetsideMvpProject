@@ -7,17 +7,22 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"></link>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.js"
+    integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
     <div class="titleBar">
         Planetside 2 Kill Tracker
     </div>
-    <app ng-app="planetside">
-    </app>
+    <div class="backborder">
+        <app ng-app="planetside"></app>
+    </div>
     <script src="index.js"></script>
     <script src="components/app.js"></script>
-    <script src="components/killList.js"></script>
+    <script src="components/eventList.js"></script>
     <script src="components/playerEvent.js"></script>
     <script src="components/selectPerson.js"></script>
     
