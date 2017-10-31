@@ -1,9 +1,13 @@
 const express = require('express');
+const request = require('request');
+const bodyParser = require('body-parser');
 let path = require('path');
+
 
 let app = express();
 
-app.use(express.static(path.join(__dirname, '/../client')))
+app.use(bodyParser())
+app.use(express.static(path.join(__dirname, '/../client')));
 
 // app.get('/', (req, res) => {
 //     res.statusCode = 200;
@@ -15,6 +19,16 @@ app.use(express.static(path.join(__dirname, '/../client')))
 //     res.statusCode = 302;
 //     res.sendFile('.index.html');
 // })
+
+app.post('/lookup', (req, res) => {
+
+    let name = req.body
+
+    request.get(`http://census.daybreakgames.com/get/ps2:v2/character/?name.first_lower=litebrite`, () => {
+
+    })
+})
+
 
 let port = process.env.PORT || 3000;
 
