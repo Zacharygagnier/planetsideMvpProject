@@ -6,8 +6,6 @@ const key = 'fishington'
 
 const getLastDeaths = (strArr) => {
     return new Promise ((resolve, reject) => {
-        // let strings = arr.toString();
-        // console.log(strings);
         const sliced = strArr.slice(1, strArr.length-1).replace(/"/g, '')
         const limit = Math.floor(sliced.length / 19) * 10;
         request.get(

@@ -1,9 +1,9 @@
-<ul>
+<ul class="list-group">
     hello!
     <li
-    ng-repeat="log in $ctrl.logs"
-    log='log'
+        class="list-group-item"
+        ng-repeat="log in $ctrl.logs"
     >
-    <player-event></player-event>
+        <player-event log="log"></player-event>
     </li>
 </ul>

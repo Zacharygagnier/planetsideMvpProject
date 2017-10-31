@@ -9,17 +9,6 @@ let app = express();
 app.use(bodyParser())
 app.use(express.static(path.join(__dirname, '/../client')));
 
-// app.get('/', (req, res) => {
-    //     res.statusCode = 200;
-//     // console.log(path + '/../')
-//     res.sendFile(`${path}/client/**`);
-// })
-
-// app.get('/*', (req, res) => {
-//     res.statusCode = 302;
-//     res.sendFile('.index.html');
-// })
-
 const key = 'fishington'
 
 
