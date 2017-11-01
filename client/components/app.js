@@ -19,7 +19,7 @@ angular.module('planetside')
                     })
                 }
             }
-            this.fetchInterval = (input) => {
+            this.fetchPush = (input) => {
                 this.players.push(input);
                 this.fetch(); 
             }
@@ -28,7 +28,7 @@ angular.module('planetside')
                     if (this.searchQuery.length === 19 && !this.players.includes(this.searchQuery)) {
                         console.log('is player id')
                         // this.players.push(`${this.searchQuery}`)
-                        this.fetchInterval(`${this.searchQuery}`)
+                        this.fetchPush(`${this.searchQuery}`)
                     } else {
                         $.ajax({
                             type: "POST",
@@ -37,7 +37,7 @@ angular.module('planetside')
                         dataType: "text",
                         success: (charID) => {
                             if (!this.players.includes(charID) && charID !== '') {
-                                this.fetchInterval(charID);
+                                this.fetchPush(charID);
                             }
                         }, 
                         fail: () => {

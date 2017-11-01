@@ -11,9 +11,6 @@ let app = express();
 app.use(bodyParser())
 app.use(express.static(path.join(__dirname, '/../client')));
 
-const key = 'fishington';
-
-
 app.post('/lookup', (req, res) => {
     let name = Object.keys(req.body)[0]
     getPlayerId(name)

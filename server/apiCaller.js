@@ -2,7 +2,7 @@ const request = require('request');
 const WebSocket = require('ws')
 
 
-const key = 'fishington'
+const key = process.env.KEY;
 
 const getLastDeaths = (strArr) => {
     return new Promise ((resolve, reject) => {
@@ -61,9 +61,6 @@ const getPlayerId = (name) => {
                 }
             }
         })
-
-
-
     })
 
 }
