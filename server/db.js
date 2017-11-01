@@ -3,10 +3,23 @@ const mongoose = require('mongoose');
 
 
 const playerSchema = mongoose.Schema({
-    username: String,
+    userName: String,
     playerId: Number
 });
 
 const Player = mongoose.model('Player', playerSchema);
 
-module.exports = Player;
+
+const save = (userName, playerId) => {
+    Player.update({playerId: playerId},
+       { $set: {userName, playerId}},
+        {upsert: true},
+         (err, success) => {
+      if  (err) {
+        console.error(err);
+      }
+    })    
+}
+
+module.exports.save = save;
+module.exports.Player = Player;

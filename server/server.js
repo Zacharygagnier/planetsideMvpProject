@@ -2,20 +2,34 @@ const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
 const {getLastDeaths, getPlayerInfo, getWeaponInfo, getPlayerId} = require('./apiCaller');
-// const {Player} = require('./db');
+const {Player, save} = require('./db');
+require('dotenv').config()
 const _ = require('lodash');
 let path = require('path');
+console.log(save)
 
 let app = express();
 
 app.use(bodyParser())
 app.use(express.static(path.join(__dirname, '/../client')));
 
+
+app.post('/remove', (req, res) => {
+    const name = Object.keys(req.body)[0]
+    Player.remove({ userName: name }, function (err) {
+        console.error(err);
+      })
+        .then(res.send('character removed'))
+})
+
+
 app.post('/lookup', (req, res) => {
-    let name = Object.keys(req.body)[0]
+    const name = Object.keys(req.body)[0]
     getPlayerId(name)
         .then((charId) => {
+            console.log(charId)
             res.send(charId)
+            save(name, charId)
         })
     })
     
@@ -27,7 +41,6 @@ app.post('/lookup', (req, res) => {
         let playerInfo = '';
         getLastDeaths(names)
             .then((events) => {
-            // rawEvents = events;
             parsedEvents = JSON.parse(events);
             parsedEvents.characters_event_list.forEach(e => {
                 playerIds.push(e.character_id, e.attacker_character_id);
@@ -37,7 +50,6 @@ app.post('/lookup', (req, res) => {
             }).then(getPlayerInfo)
               .then((info) => {
                  playerInfo = info;
-                //  console.log(playerInfo)
                  return _.uniq(weaponId).join(',')             
               }).then(getWeaponInfo)
                 .then((info) => {

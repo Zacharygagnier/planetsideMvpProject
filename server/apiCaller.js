@@ -1,8 +1,10 @@
 const request = require('request');
 const WebSocket = require('ws')
+require('dotenv').config()
 
 
-const key = process.env.KEY;
+
+const key = process.env.APIKEY;
 
 const getLastDeaths = (strArr) => {
     return new Promise ((resolve, reject) => {

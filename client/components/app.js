@@ -12,7 +12,6 @@ angular.module('planetside')
                         url: '/deaths',
                         headers: {charid: stringed},
                         success: (eventData) => {
-                            // const eventParsed = JSON.parse(eventData)
                             this.logs = eventData;
                             console.log(this.logs)
                         }
@@ -27,17 +26,17 @@ angular.module('planetside')
                 if (this.searchQuery.length){
                     if (this.searchQuery.length === 19 && !this.players.includes(this.searchQuery)) {
                         console.log('is player id')
-                        // this.players.push(`${this.searchQuery}`)
                         this.fetchPush(`${this.searchQuery}`)
                     } else {
                         $.ajax({
                             type: "POST",
                             url: '/lookup',
                             data: this.searchQuery,
-                        dataType: "text",
-                        success: (charID) => {
-                            if (!this.players.includes(charID) && charID !== '') {
-                                this.fetchPush(charID);
+                            dataType: "text",
+                            success: (charID) => {
+                                if (!this.players.includes(charID) && charID !== '') {
+                                    this.fetchPush(charID);
+                                    console.log(charID)
                             }
                         }, 
                         fail: () => {
@@ -45,8 +44,18 @@ angular.module('planetside')
                         }
                     });
                 }
-
                 }
+            }
+            this.removePlayer = () => {
+                $.ajax({
+                    type: "POST",
+                    url: '/remove',
+                    data: this.searchQuery,
+                    dataType: "text",
+                    success: (response) => {
+                        console.log('removed from list')
+                    }
+                })
             }
             setInterval(this.fetch, 5000)
         },
