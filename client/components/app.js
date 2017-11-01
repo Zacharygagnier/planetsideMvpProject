@@ -1,4 +1,5 @@
 angular.module('planetside')
+
     .component('app', {
         controller: function() {
             this.logs = [];
@@ -15,10 +16,6 @@ angular.module('planetside')
                   }
               })
             }
-            // this.fetchPush = (input) => {
-            //     this.players.push(input);
-            //     this.fetch(); 
-            // }
             this.addPlayer = () => {
                 if (this.searchQuery.length){
                   $.ajax({
@@ -44,8 +41,6 @@ angular.module('planetside')
                     dataType: "text",
                     success: (response) => {
                         console.log('removed from list')
-                        const index =this.players.indexOf(this.searchQuery)
-                        this.players.splice(index, 1);
                     }
                 })
             }
@@ -54,3 +49,7 @@ angular.module('planetside')
         
         templateUrl: 'templates/app.html'
     });
+
+    // app.factory('getEvents', ($http, $q) => {
+
+    // })
