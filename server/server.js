@@ -56,7 +56,7 @@ app.post('/lookup', (req, res) => {
                         return {
                             name: parsedPlayer[e.character_id],
                             character_id: e.character_id,
-                            weapon: e.attacker_weapon_id,
+                            weapon: weaponInfo[e.attacker_weapon_id],
                             attacker: parsedPlayer[e.attacker_character_id],
                             attackerId: e.attacker_character_id,
                             timestamp: e.timestamp

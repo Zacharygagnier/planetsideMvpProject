@@ -12,9 +12,9 @@ angular.module('planetside')
                         url: '/deaths',
                         headers: {charid: stringed},
                         success: (eventData) => {
-                            const eventParsed = JSON.parse(eventData)
-                            this.logs = eventParsed.characters_event_list;
-                            console.log(this.players, this.logs)
+                            // const eventParsed = JSON.parse(eventData)
+                            this.logs = eventData;
+                            console.log(this.logs)
                         }
                     })
                 }
