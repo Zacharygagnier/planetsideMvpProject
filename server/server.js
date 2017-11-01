@@ -6,7 +6,6 @@ const {Player, save} = require('./db');
 require('dotenv').config()
 const _ = require('lodash');
 let path = require('path');
-console.log(save)
 
 let app = express();
 
@@ -27,22 +26,27 @@ app.post('/lookup', (req, res) => {
     const name = Object.keys(req.body)[0]
     getPlayerId(name)
         .then((charId) => {
-            console.log(charId)
+            const stringId = '' + charId;
             res.send(charId)
-            save(name, charId)
+            save(name, stringId)
         })
     })
     
     app.get('/deaths', (req, res) => {
-        // let names = req.headers.charid
-
         let parsedEvents;
         const playerIds = [];
         const weaponId = [];
         let playerInfo = '';
         Player.find({})
-            .then(console.log);
-        getLastDeaths(names)
+            .then(profiles => 
+                profiles.reduce((prev, current, i) => {
+                    if (i === 0) {
+                        return prev + current.playerId
+                    } else {
+                        return prev + ',' + current.playerId
+                    }
+            }, ''))
+            .then(getLastDeaths)
             .then((events) => {
             parsedEvents = JSON.parse(events);
             parsedEvents.characters_event_list.forEach(e => {

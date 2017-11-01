@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const playerSchema = mongoose.Schema({
     userName: String,
-    playerId: Number
+    playerId: String
 });
 
 const Player = mongoose.model('Player', playerSchema);

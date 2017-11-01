@@ -6,12 +6,11 @@ require('dotenv').config()
 
 const key = process.env.APIKEY;
 
-const getLastDeaths = (strArr) => {
+const getLastDeaths = (idString) => {
     return new Promise ((resolve, reject) => {
-        const sliced = strArr.slice(1, strArr.length-1).replace(/"/g, '')
-        const limit = Math.floor(sliced.length / 19) * 10;
+        const limit = Math.floor(idString.length / 19) * 10;
         request.get(
-            `https://census.daybreakgames.com/s:${key}/get/ps2/characters_event/?character_id=${sliced}&c:limit=${limit}&type=DEATH`
+            `https://census.daybreakgames.com/s:${key}/get/ps2/characters_event/?character_id=${idString}&c:limit=${limit}&type=DEATH`
             , (err, allDeaths) => {
                 if (err) {
                 reject(err)

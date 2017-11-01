@@ -5,18 +5,20 @@ angular.module('planetside')
             this.logs = [];
 
             this.fetch = () => {    
-                if (this.players.length) {
-                    // let stringed = JSON.stringify(this.players);
-                    $.ajax({
-                        type: "get",
-                        url: '/deaths',
-                        // headers: {charid: stringed},
-                        success: (eventData) => {
-                            this.logs = eventData;
-                            console.log(this.logs)
-                        }
-                    })
-                }
+              console.log('ran');
+              // let stringed = JSON.stringify(this.players);
+              $.ajax({
+                  type: "get",
+                  url: '/deaths',
+                  // headers: {charid: stringed},
+                  success: (eventData) => {
+                      this.logs = eventData;
+                      console.log(this.logs)
+                  },
+                  fail: (err) => {
+                      console.error(err);
+                  }
+              })
             }
             this.fetchPush = (input) => {
                 this.players.push(input);
