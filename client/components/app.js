@@ -1,9 +1,8 @@
 angular.module('planetside')
 
     .component('app', {
-        controller: function() {
+        controller: function($interval) {
             this.logs = [];
-
             this.fetch = () => {    
               $.ajax({
                   type: "get",
@@ -44,7 +43,7 @@ angular.module('planetside')
                     }
                 })
             }
-            setInterval(this.fetch, 5000)
+            $interval(this.fetch, 3000)
         },
         
         templateUrl: 'templates/app.html'
