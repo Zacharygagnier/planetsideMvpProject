@@ -20,6 +20,20 @@ const getLastDeaths = (strArr) => {
     })
 }
 
+const getPlayerInfo = (arr) => {
+    return new Promise ((resolve, reject) => {
+        request.get(
+            `https://census.daybreakgames.com/s:${key}/get/ps2/characters_event/?character_id=${sliced}&c:limit=${limit}&type=DEATH`
+        , (err, allDeaths) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(allDeaths.body)
+            }
+        })
+    })
+}
+
 const getPlayerId = (name) => {
     return new Promise((resolve, reject) => {
         request.get(`http://census.daybreakgames.com/s:${key}/get/ps2:v2/character/?name.first_lower=${name}`, (err, profile) => {
@@ -40,7 +54,6 @@ const getPlayerId = (name) => {
 
 }
 
-http://census.daybreakgames.com/get/ps2:v2/characters_event/?character_id=5428010618020694593&c:limit=10&type=DEATH
 
 
 // const id = 'fishington'
@@ -58,4 +71,5 @@ http://census.daybreakgames.com/get/ps2:v2/characters_event/?character_id=542801
 //     console.log('Message from server ', event.data);
 // });
 module.exports.getLastDeaths = getLastDeaths;
-module.exports.getPlayerId = getPlayerId
+module.exports.getPlayerInfo = getPlayerInfo;
+module.exports.getPlayerId = getPlayerId;

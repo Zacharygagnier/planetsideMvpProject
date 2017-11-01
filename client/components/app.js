@@ -3,8 +3,8 @@ angular.module('planetside')
         controller: function() {
             this.players = [];
             this.logs = [];
-            this.interval;
-            this.fetch = () => {
+
+            this.fetch = () => {    
                 if (this.players.length) {
                     let stringed = JSON.stringify(this.players);
                     $.ajax({
@@ -12,39 +12,32 @@ angular.module('planetside')
                         url: '/deaths',
                         headers: {charid: stringed},
                         success: (eventData) => {
-                            console.log('refreshed data')
                             const eventParsed = JSON.parse(eventData)
                             this.logs = eventParsed.characters_event_list;
+                            console.log(this.players, this.logs)
                         }
                     })
                 }
             }
             this.fetchInterval = (input) => {
-                clearInterval(this.interval)
                 this.players.push(input);
-                this.fetch();
-                this.interval = setInterval(this.fetch, 5000);
+                this.fetch(); 
             }
             this.addPlayer = () => {
                 if (this.searchQuery.length){
-                    if (this.searchQuery.length === 19) {
+                    if (this.searchQuery.length === 19 && !this.players.includes(this.searchQuery)) {
                         console.log('is player id')
                         // this.players.push(`${this.searchQuery}`)
                         this.fetchInterval(`${this.searchQuery}`)
                     } else {
-                        this.added = this.searchQuery
                         $.ajax({
                             type: "POST",
                             url: '/lookup',
-                            data: this.added,
+                            data: this.searchQuery,
                         dataType: "text",
-                        success: (data) => {
-                            if (this.players.indexOf(data) === -1 && data !== '') {
-                                this.fetchInterval(data);
-                                // clearInterval(this.interval)
-                                // this.players.push(data);
-                                // this.fetch();
-                                // this.interval = setInterval(this.fetch, 5000);
+                        success: (charID) => {
+                            if (!this.players.includes(charID) && charID !== '') {
+                                this.fetchInterval(charID);
                             }
                         }, 
                         fail: () => {
@@ -55,6 +48,8 @@ angular.module('planetside')
 
                 }
             }
+            setInterval(this.fetch, 5000)
         },
+        
         templateUrl: 'templates/app.html'
     });

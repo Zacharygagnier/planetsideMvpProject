@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+const db = require('./config')
+const mongoose = require('mongoose');
 
 
 const playerSchema = mongoose.Schema({
