@@ -34,11 +34,14 @@ app.post('/lookup', (req, res) => {
     })
     
     app.get('/deaths', (req, res) => {
-        let names = req.headers.charid
+        // let names = req.headers.charid
+
         let parsedEvents;
         const playerIds = [];
         const weaponId = [];
         let playerInfo = '';
+        Player.find({})
+            .then(console.log);
         getLastDeaths(names)
             .then((events) => {
             parsedEvents = JSON.parse(events);

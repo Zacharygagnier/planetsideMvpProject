@@ -6,11 +6,11 @@ angular.module('planetside')
 
             this.fetch = () => {    
                 if (this.players.length) {
-                    let stringed = JSON.stringify(this.players);
+                    // let stringed = JSON.stringify(this.players);
                     $.ajax({
                         type: "get",
                         url: '/deaths',
-                        headers: {charid: stringed},
+                        // headers: {charid: stringed},
                         success: (eventData) => {
                             this.logs = eventData;
                             console.log(this.logs)
@@ -54,6 +54,8 @@ angular.module('planetside')
                     dataType: "text",
                     success: (response) => {
                         console.log('removed from list')
+                        const index =this.players.indexOf(this.searchQuery)
+                        this.players.splice(index, 1);
                     }
                 })
             }
