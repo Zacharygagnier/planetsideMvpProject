@@ -1,51 +1,39 @@
 angular.module('planetside')
     .component('app', {
         controller: function() {
-            this.players = [];
             this.logs = [];
 
             this.fetch = () => {    
-              console.log('ran');
-              // let stringed = JSON.stringify(this.players);
               $.ajax({
                   type: "get",
                   url: '/deaths',
-                  // headers: {charid: stringed},
                   success: (eventData) => {
                       this.logs = eventData;
-                      console.log(this.logs)
                   },
                   fail: (err) => {
                       console.error(err);
                   }
               })
             }
-            this.fetchPush = (input) => {
-                this.players.push(input);
-                this.fetch(); 
-            }
+            // this.fetchPush = (input) => {
+            //     this.players.push(input);
+            //     this.fetch(); 
+            // }
             this.addPlayer = () => {
                 if (this.searchQuery.length){
-                    if (this.searchQuery.length === 19 && !this.players.includes(this.searchQuery)) {
-                        console.log('is player id')
-                        this.fetchPush(`${this.searchQuery}`)
-                    } else {
-                        $.ajax({
-                            type: "POST",
-                            url: '/lookup',
-                            data: this.searchQuery,
-                            dataType: "text",
-                            success: (charID) => {
-                                if (!this.players.includes(charID) && charID !== '') {
-                                    this.fetchPush(charID);
-                                    console.log(charID)
-                            }
-                        }, 
-                        fail: () => {
-                            console.log('did not work')
-                        }
-                    });
-                }
+                  $.ajax({
+                      type: "POST",
+                      url: '/lookup',
+                      data: this.searchQuery,
+                      dataType: "text",
+                      success: (charID) => {
+                              this.fetch();
+                              console.log(charID)
+                                }, 
+                      fail: () => {
+                          console.log('did not work')
+                      }
+                    })
                 }
             }
             this.removePlayer = () => {

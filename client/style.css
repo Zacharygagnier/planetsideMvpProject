@@ -18,10 +18,12 @@
 }
 
 .centerbody {
+    background-image:url("./images/pBackground.jpg");
+    background-size: cover;
     float: none;
     margin: 0 auto;
     text-align: center;
-    background-color: rgb(159, 159, 184);
+    /* background-color: rgb(159, 159, 184); */
     width: 80%;
     height: 100%
 }
