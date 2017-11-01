@@ -23,7 +23,7 @@ const getLastDeaths = (strArr) => {
 const getPlayerInfo = (idString) => {
     return new Promise ((resolve, reject) => {
         request.get(
-            `https://census.daybreakgames.com/get/ps2:v2/character/?character_id=${idString}`
+            `https://census.daybreakgames.com/s:${key}/get/ps2:v2/character/?character_id=${idString}`
         , (err, playerInfo) => {
             if (err) {
                 reject(err)
@@ -36,7 +36,7 @@ const getPlayerInfo = (idString) => {
 
 const getWeaponInfo = (idString) => {
     return new Promise ((resolve, reject) => {
-        request.get(`http://census.daybreakgames.com/get/ps2/item/?item_id=${idString}`
+        request.get(`http://census.daybreakgames.com/s:${key}/get/ps2/item/?item_id=${idString}`
         , (err, weaponInfo) => {
             if (err) {
                 reject(err)
@@ -86,4 +86,5 @@ const getPlayerId = (name) => {
 // });
 module.exports.getLastDeaths = getLastDeaths;
 module.exports.getPlayerInfo = getPlayerInfo;
+module.exports.getWeaponInfo = getWeaponInfo;
 module.exports.getPlayerId = getPlayerId;
