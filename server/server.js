@@ -1,7 +1,7 @@
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
-const {getLastDeaths, getPlayerInfo, getPlayerId} = require('./apiCaller');
+const {getLastDeaths, getPlayerInfo, getWeaponInfo, getPlayerId} = require('./apiCaller');
 const {Player} = require('./db');
 const _ = require('lodash');
 let path = require('path');
@@ -25,24 +25,31 @@ app.post('/lookup', (req, res) => {
     app.get('/deaths', (req, res) => {
         let names = req.headers.charid
         let rawEvents; 
+        const playerIds = [];
+        const weaponId = [];
+        const playerInfo = '';
         getLastDeaths(names)
             .then((events) => {
             rawEvents = events;
-            let parsedEvents = JSON.parse(events);
-            let playerIds = [];
+            const parsedEvents = JSON.parse(events);
             parsedEvents.characters_event_list.forEach(e => {
                 playerIds.push(e.character_id, e.attacker_character_id);
+                weaponId.push(e.attacker_weapon_id);
             })
-            return _.uniq(playerIds);
-            }).then()
+            console.log(playerIds);
+            return _.uniq(playerIds).join(',');
+            }).then(getPlayerInfo)
+              .then((info) => {
+                 playerInfo = info;
+                 console.log(playerInfo)
+                 getWeaponInfo( _.uniq(weaponId).join(','))                
+              }).then(console.log)
 
 
 
             // .then((events) => {
             //     res.json(events);
             // })
-        // https://census.daybreakgames.com/get/ps2:v2/item/?item_type_id=26
-        // https://census.daybreakgames.com/get/ps2:v2/character/?character_id=5428047126282473569
     })
     
     

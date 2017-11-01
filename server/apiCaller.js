@@ -10,8 +10,8 @@ const getLastDeaths = (strArr) => {
         const limit = Math.floor(sliced.length / 19) * 10;
         request.get(
             `https://census.daybreakgames.com/s:${key}/get/ps2/characters_event/?character_id=${sliced}&c:limit=${limit}&type=DEATH`
-        , (err, allDeaths) => {
-            if (err) {
+            , (err, allDeaths) => {
+                if (err) {
                 reject(err)
             } else {
                 resolve(allDeaths.body)
@@ -20,19 +20,33 @@ const getLastDeaths = (strArr) => {
     })
 }
 
-const getPlayerInfo = (arr) => {
+const getPlayerInfo = (idString) => {
     return new Promise ((resolve, reject) => {
         request.get(
-            `https://census.daybreakgames.com/s:${key}/get/ps2/characters_event/?character_id=${sliced}&c:limit=${limit}&type=DEATH`
-        , (err, allDeaths) => {
+            `https://census.daybreakgames.com/get/ps2:v2/character/?character_id=${idString}`
+        , (err, playerInfo) => {
             if (err) {
                 reject(err)
             } else {
-                resolve(allDeaths.body)
+                resolve(playerInfo.body)
             }
         })
     })
 }
+
+const getWeaponInfo = (idString) => {
+    return new Promise ((resolve, reject) => {
+        request.get(`http://census.daybreakgames.com/get/ps2/item/?item_id=${idString}`
+        , (err, weaponInfo) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(weaponInfo.body)
+            }
+        })
+    })
+}
+
 
 const getPlayerId = (name) => {
     return new Promise((resolve, reject) => {
