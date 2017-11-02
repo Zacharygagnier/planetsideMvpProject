@@ -1,7 +1,7 @@
 angular.module('planetside')
-.component('eventList', {
-    bindings: {
-        logs: '<'
-    },
-    templateUrl: 'templates/eventList.html'
-});
+	.component('eventList', {
+		bindings: {
+			logs: '<'
+		},
+		templateUrl: 'templates/eventList.html'
+	});

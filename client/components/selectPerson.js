@@ -1,5 +1,5 @@
 angular.module('planetside')
 
-    .component('selectPerson', {
-        templateUrl: 'templates/selectPerson.html'
-    });
+	.component('selectPerson', {
+		templateUrl: 'templates/selectPerson.html'
+	});

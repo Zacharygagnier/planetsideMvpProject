@@ -1,1 +1,1 @@
-angular.module('planetside', [])
+angular.module('planetside', []);
